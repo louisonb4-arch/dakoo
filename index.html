@@ -570,19 +570,35 @@ footer{background:var(--ink);padding:76px 0 38px;color:var(--paper)}
   .story{padding:110px 0 100px}
   .menu,.gallery,.infos{padding:110px 0 100px}
   .reviews{padding:0 0 110px}
-  .story-visual{height:440px}
-  .polaroid img{width:130px;height:130px}
+  /* histoire mobile : carrousel polaroids scroll-snap */
+  .story-visual{
+    height:auto;max-width:none;position:relative;
+    display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
+    margin:0 -22px;padding:26px 22vw 34px 30px;
+    scrollbar-width:none;-webkit-overflow-scrolling:touch;
+  }
+  .story-visual::-webkit-scrollbar{display:none}
+  .polaroid{position:static;flex:0 0 60vw;scroll-snap-align:center}
+  .polaroid img{width:100%;height:auto;aspect-ratio:1}
+  .polaroid:nth-child(odd){transform:rotate(-2.5deg)}
+  .polaroid:nth-child(even){transform:rotate(2.5deg) translateY(12px)}
+  .story-sticker{
+    position:absolute;top:-2px;right:26px;left:auto;bottom:auto;z-index:6;
+    font-size:13px;padding:9px 16px;
+  }
   .story-hangul-bg{font-size:120px}
   .formule{grid-template-columns:1fr;gap:14px;padding:26px 24px}
   .formule .f-kr{font-size:30px}
   .formule .f-price{font-size:40px}
-  .food-strip{grid-template-columns:1fr 1fr;gap:10px 16px;margin-top:80px;padding:0 4px 30px}
+  /* carte mobile : collage éclaté */
+  .food-strip{display:block;margin-top:90px;padding:0 6px 26px}
   .food-strip figure:nth-child(n+4){display:block}
   .food-strip figure:nth-child(n+5){display:none}
-  .food-strip figure:nth-child(1){transform:rotate(-4.5deg);z-index:2}
-  .food-strip figure:nth-child(2){transform:rotate(3.5deg) translateY(26px)}
-  .food-strip figure:nth-child(3){transform:rotate(3deg) translateY(-8px)}
-  .food-strip figure:nth-child(4){transform:rotate(-3deg) translateY(18px);z-index:2}
+  .food-strip figure{position:relative}
+  .food-strip figure:nth-child(1){width:72%;transform:rotate(-5deg);z-index:1}
+  .food-strip figure:nth-child(2){width:56%;margin:-14% 2% 0 auto;transform:rotate(6deg);z-index:2}
+  .food-strip figure:nth-child(3){width:58%;margin:-10% 0 0 6%;transform:rotate(3.5deg);z-index:3}
+  .food-strip figure:nth-child(4){width:64%;margin:-26% 6% 0 auto;transform:rotate(-6.5deg);z-index:2}
   .gallery-grid{grid-template-columns:repeat(2,1fr)}
   .ticket{padding:38px 26px 48px}
   .ticket .stamp{width:88px;height:88px;font-size:11px;top:-20px;right:-10px}
