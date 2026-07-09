@@ -967,6 +967,20 @@ if (new URLSearchParams(location.search).has('static')) {
   document.querySelector('.hero').style.minHeight = '900px';
 }
 
+// mobile : le carrousel de l'histoire défile avec le scroll de la page
+const storyVisual = document.querySelector('.story-visual');
+if (storyVisual && matchMedia('(max-width:680px)').matches) {
+  storyVisual.style.scrollSnapType = 'none';
+  const driveCarousel = () => {
+    const r = storyVisual.getBoundingClientRect();
+    const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height)));
+    storyVisual.scrollLeft = p * (storyVisual.scrollWidth - storyVisual.clientWidth);
+  };
+  addEventListener('scroll', driveCarousel, {passive:true});
+  addEventListener('resize', driveCarousel, {passive:true});
+  driveCarousel();
+}
+
 // debug largeur (?debug)
 if (new URLSearchParams(location.search).has('debug')) {
   const wide = [...document.querySelectorAll('*')]
