@@ -570,22 +570,9 @@ footer{background:var(--ink);padding:76px 0 38px;color:var(--paper)}
   .story{padding:110px 0 100px}
   .menu,.gallery,.infos{padding:110px 0 100px}
   .reviews{padding:0 0 110px}
-  /* histoire mobile : carrousel polaroids scroll-snap */
-  .story-visual{
-    height:auto;max-width:none;position:relative;
-    display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;
-    margin:0 -22px;padding:26px 22vw 34px 30px;
-    scrollbar-width:none;-webkit-overflow-scrolling:touch;
-  }
-  .story-visual::-webkit-scrollbar{display:none}
-  .polaroid{position:static;flex:0 0 60vw;scroll-snap-align:center}
-  .polaroid img{width:100%;height:auto;aspect-ratio:1}
-  .polaroid:nth-child(odd){transform:rotate(-2.5deg)}
-  .polaroid:nth-child(even){transform:rotate(2.5deg) translateY(12px)}
-  .story-sticker{
-    position:absolute;top:-2px;right:26px;left:auto;bottom:auto;z-index:6;
-    font-size:13px;padding:9px 16px;
-  }
+  /* histoire mobile : pas de photos */
+  .story-visual{display:none}
+  .story-grid{gap:0}
   .story-hangul-bg{font-size:120px}
   .formule{grid-template-columns:1fr;gap:14px;padding:26px 24px}
   .formule .f-kr{font-size:30px}
@@ -965,20 +952,6 @@ if (new URLSearchParams(location.search).has('static')) {
   document.documentElement.style.scrollBehavior = 'auto';
   document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
   document.querySelector('.hero').style.minHeight = '900px';
-}
-
-// mobile : le carrousel de l'histoire défile avec le scroll de la page
-const storyVisual = document.querySelector('.story-visual');
-if (storyVisual && matchMedia('(max-width:680px)').matches) {
-  storyVisual.style.scrollSnapType = 'none';
-  const driveCarousel = () => {
-    const r = storyVisual.getBoundingClientRect();
-    const p = Math.min(1, Math.max(0, (innerHeight - r.top) / (innerHeight + r.height)));
-    storyVisual.scrollLeft = p * (storyVisual.scrollWidth - storyVisual.clientWidth);
-  };
-  addEventListener('scroll', driveCarousel, {passive:true});
-  addEventListener('resize', driveCarousel, {passive:true});
-  driveCarousel();
 }
 
 // debug largeur (?debug)
